@@ -122,11 +122,71 @@ O script `05_quality_checks.sql` inclui verificações como:
 - Algumas dimensões podem conter valores nulos (ex.: driver ausente), e foram tratados nas análises.
 
 ---
+## 📌 Key Business Insights
 
-## 🚀 Próximos passos
-- Criar um dashboard (Power BI / Metabase)
-- Adicionar análises preditivas (ex.: previsão de SLA/cycle_time)
-- Feature engineering por loja, hub e canal para modelos de ML
+Based on the exploratory analysis:
+
+## 📍 Geographic performance
+
+São Paulo concentrates the highest order volume and GMV, however it also presents the longest average delivery cycle time (~165 minutes).
+
+Southern states (RS and PR) show significantly better SLA performance, with lower average cycle times, suggesting operational efficiency in lower-density markets.
+
+## 📱 Channel strategy
+
+- Marketplace channels (especially FOOD PLACE) drive most of the volume and revenue.
+
+- Own channels (e.g., CHOCO PLACE, OTHER PLACE, LISBON PLACE) present substantially higher average ticket values, indicating stronger monetization despite lower volume.
+
+This suggests a typical growth pattern:
+
+- Marketplaces act as acquisition channels.
+
+- Proprietary channels maximize revenue per order.
+
+## 🚚 Logistics
+
+- Motoboys handle the majority of deliveries with average distances around 3–4 km.
+
+- Bikers are primarily used for short-distance deliveries (~1 km), confirming modal specialization.
+
+- Records with missing driver information and extreme distances were excluded from operational performance metrics.
+
+## 💳 Payments
+
+- Payment approval was derived from payment_status = 'PAID'.
+
+- No effective chargeback events were observed in completed orders.
+
+- Payment methods show strong concentration in online and voucher-based transactions.
+
+## ⚠️ Dataset limitations
+
+- No customer-level information was available (no cohort or retention analysis).
+
+- Chargeback status exists but is not associated with completed orders.
+
+- Some deliveries contain missing driver attributes and outlier distances.
+
+These limitations were handled via filtering and documented in the analysis.
+
+## 🚀 Next steps
+
+- Build a Power BI dashboard for KPIs and SLA monitoring.
+
+- Feature engineering by hub, store and channel for ML models.
+
+- Predict delivery cycle time and cancellation probability.
+
+---
+## 📦 Dataset
+
+Dataset publicly available on Kaggle.
+
+Source: Kaggle Delivery Dataset  
+Used for educational and portfolio purposes only.
+
+All credits to the original author.
 
 ---
 
