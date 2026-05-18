@@ -1,197 +1,282 @@
-# Projeto Delivery SQL Analytics (PostgreSQL) — Portfólio
+Delivery Analytics SQL Project 🚚📊
 
-Projeto de ponta a ponta em **PostgreSQL** simulando um cenário real de delivery (estilo Zé Delivery):
-**ingestão de CSV → camada RAW → Data Warehouse → camada Analytics → queries de portfólio**.
+Projeto de análise de dados ponta a ponta utilizando PostgreSQL, simulando uma operação real de delivery inspirada em plataformas como Zé Delivery / marketplaces de entrega.
 
-> Objetivo: demonstrar domínio de **SQL**, modelagem dimensional, análise exploratória e validação de dados
-com foco em uma vaga de **Cientista de Dados / Analytics**.
+O projeto foi desenvolvido com foco em:
 
----
+modelagem analítica;
+SQL aplicado a negócio;
+métricas operacionais;
+qualidade de dados;
+storytelling com dados;
+construção de portfólio para vagas de Dados / Analytics / Ciência de Dados.
+📌 Objetivo do Projeto
 
-## 👨‍💻 Sobre mim (objetivo)
-Sou estudante de **Ciência de Dados** e estou construindo meu portfólio para minha **primeira oportunidade** na área.
-Este projeto foi desenhado para evidenciar capacidade de:
-- Estruturar dados (ETL/ELT)
-- Modelagem dimensional (DW)
-- SQL analítico (window functions, percentis, CTEs)
-- Qualidade e consistência (data checks)
-- Geração de insights de negócio (KPIs e operação)
+Construir um pipeline analítico completo utilizando SQL, desde a ingestão dos dados até a geração de insights operacionais e executivos.
 
----
+O projeto busca demonstrar capacidade de:
 
-## 🧰 Tecnologias
-- PostgreSQL
-- pgAdmin
-- SQL (CTEs, Window Functions, Percentiles, Aggregations)
+✅ Estruturar dados em ambiente analítico
+✅ Trabalhar com modelagem dimensional (Data Warehouse)
+✅ Criar métricas de negócio
+✅ Realizar análises operacionais com SQL avançado
+✅ Identificar problemas operacionais através de dados
+✅ Traduzir dados em insights acionáveis
 
----
+🧠 Contexto de Negócio
 
-## 📦 Dataset (camadas e tabelas)
-### Arquivos CSV (camada RAW)
-- `orders.csv` (~436k registros importados)
-- `deliveries.csv`
-- `payments.csv`
-- `stores.csv`
-- `hubs.csv`
-- `channels.csv`
-- `drivers.csv`
+O dataset representa uma operação de delivery contendo:
 
-### Modelagem (DW)
-**Dimensões**
-- `dw.dim_date`
-- `dw.dim_store`
-- `dw.dim_hub`
-- `dw.dim_channel`
-- `dw.dim_driver`
+pedidos;
+pagamentos;
+entregas;
+hubs logísticos;
+canais de venda;
+drivers;
+métricas de SLA e tempo operacional.
 
-**Fatos**
-- `dw.fact_orders`
-- `dw.fact_deliveries`
-- `dw.fact_payments`
+A proposta foi analisar:
 
-### Camada Analytics
-- `analytics.vw_order_360` (visão consolidada)
-- views de KPI e queries finais no arquivo `06_portfolio_queries.sql`
+performance operacional;
+receita;
+comportamento logístico;
+cancelamentos;
+impacto do tempo de entrega;
+eficiência por estado, canal e modal de entrega.
+🛠️ Tecnologias Utilizadas
+Banco de Dados
+PostgreSQL
+pgAdmin
+Linguagem
+SQL
+Visualização
+Power BI
+Conceitos Aplicados
+Data Warehouse
+Star Schema
+Data Quality
+Window Functions
+Percentile Functions
+KPI Analytics
+Storytelling with Data
+🏗️ Estrutura do Projeto
+projeto-delivery-sql/
+│
+├── data/
+│   └── raw/
+│       ├── orders.csv
+│       ├── deliveries.csv
+│       ├── payments.csv
+│       ├── stores.csv
+│       ├── hubs.csv
+│       ├── channels.csv
+│       └── drivers.csv
+│
+├── sql/
+│   ├── 00_schemas.sql
+│   ├── 01_raw_tables.sql
+│   ├── 02_dimensions.sql
+│   ├── 03_facts.sql
+│   ├── 04_views.sql
+│   ├── 05_quality_checks.sql
+│   └── 06_portfolio_queries.sql
+│
+├── docs/
+│   ├── dashboard_prints/
+│   └── power_bi/
+│
+└── README.md
+🗂️ Arquitetura Analítica
+Camada RAW
 
----
+Importação dos arquivos CSV originais sem transformação estrutural.
 
-## 🗺️ Arquitetura do projeto (pipeline)
-1. **RAW**: tabelas espelho dos CSVs
-2. **DW**: modelo dimensional (star schema)
-3. **Analytics**: view 360 + KPIs + queries de portfólio
-4. **Quality checks**: integridade e registros órfãos
+Tabelas RAW
+raw.orders
+raw.deliveries
+raw.payments
+raw.stores
+raw.hubs
+raw.channels
+raw.drivers
+Data Warehouse (DW)
+Dimensões
+dw.dim_store
+dw.dim_hub
+dw.dim_channel
+dw.dim_driver
+Fatos
+dw.fact_orders
+dw.fact_deliveries
+dw.fact_payments
+Camada Analytics
+Principais Views
+analytics.vw_order_360
+analytics.vw_kpi_daily
+analytics.vw_kpi_by_state
+analytics.vw_kpi_by_channel
+analytics.vw_cancel_vs_cycle
+📊 Principais Análises Desenvolvidas
+📈 KPIs Executivos
+GMV
+Volume de pedidos
+Ticket médio
+Taxa de cancelamento
+SLA operacional
+🚚 Operação Logística
+Relação entre distância e tempo de entrega
+Performance por modal de entrega
+Tempo médio por estado
+P90 de cycle time
+Ranking de hubs críticos
+❌ Cancelamentos
 
----
+Análise da relação entre:
 
-## ✅ Como executar o projeto (passo a passo)
-### 1) Criar banco
-Crie um banco no PostgreSQL (ex.: `delivery_dw`) e abra o Query Tool no pgAdmin.
+tempo de entrega;
+SLA operacional;
+distância;
+cancelamentos.
+Principal Insight
 
-### 2) Rodar scripts SQL (na ordem)
-Execute os arquivos da pasta `sql/` nesta ordem:
+Pedidos com maior tempo de entrega apresentam aumento significativo na taxa de cancelamento.
 
-1. `00_schemas.sql`
-2. `01_raw_tables.sql`
-3. **Importar os CSVs** (pgAdmin: Import/Export Data → Import)
-4. `02_dimensions.sql`
-5. `03_facts.sql`
-6. `04_views.sql`
-7. `05_quality_checks.sql`
-8. `06_portfolio_queries.sql`
 
-### 3) Import dos CSVs (pgAdmin)
-- Format: `csv`
-- Header: ON
-- Delimiter: `,`
-- Quote/Escape: `"`
+💳 Pagamentos
 
-**Obs (real case):**
-Em `stores.csv` pode haver problema de encoding. Se ocorrer erro de UTF-8,
-importe selecionando `LATIN1` ou `WIN1252` no campo *Encoding* do pgAdmin.
+Volume por método de pagamento
+Distribuição de status
+Taxa de aprovação
+Análise de chargeback
 
----
 
-## 📊 Principais análises (portfólio)
-As queries finais estão em: `sql/06_portfolio_queries.sql`.
+📱 Canais de Venda
 
-Destaques:
-- Painel executivo (GMV, ticket médio, cancelamentos)
-- Série diária com variação (LAG / DoD)
-- Pareto / Top lojas por GMV + share
-- Segmentos e estados com SLA (P90 cycle time)
-- Ranking de hubs (pior P90)
-- Pagamentos por método e status (`PAID`, `AWAITING`, `ACHARGEBACK`)
-- Distância vs tempo por faixas (bins)
-- Performance por tipo/modal de driver
-- Margem de delivery (fee vs cost)
+Comparação entre:
 
----
+marketplaces;
+canais próprios;
+ticket médio;
+volume de receita.
+Principal Insight
 
-## 🧪 Qualidade de dados (Data Quality)
-O script `05_quality_checks.sql` inclui verificações como:
-- stores sem hub
-- deliveries sem pedidos
-- payments sem pedidos
-- validação de chaves e integridade referencial
+Marketplaces concentram volume, enquanto canais próprios apresentam maior ticket médio.
 
----
+📌 Insights Obtidos
 
-## 🧠 Insights e limitações do dataset
-- `payment_status` possui os valores: `PAID`, `AWAITING`, `ACHARGEBACK`.
-- Alguns arquivos podem apresentar encoding diferente de UTF-8 (tratado no processo de import).
-- Algumas dimensões podem conter valores nulos (ex.: driver ausente), e foram tratados nas análises.
+Operação
+São Paulo concentra maior GMV e volume operacional, porém apresenta maior tempo médio de entrega.
+Estados com menor densidade operacional apresentaram melhor SLA médio.
 
----
-## 📌 Key Business Insights
+Logística
+Motoboys concentram a maior parte das entregas.
+Bikers atuam majoritariamente em entregas de curta distância.
+Receita
 
-Based on the exploratory analysis:
+Marketplaces geram maior volume.
+Canais próprios apresentam maior monetização por pedido.
 
-## 📍 Geographic performance
+Cancelamentos
+O aumento do cycle time impacta diretamente a taxa de cancelamento.
 
-São Paulo concentrates the highest order volume and GMV, however it also presents the longest average delivery cycle time (~165 minutes).
 
-Southern states (RS and PR) show significantly better SLA performance, with lower average cycle times, suggesting operational efficiency in lower-density markets.
+🧪 Qualidade de Dados
 
-## 📱 Channel strategy
+Foram realizadas validações como:
 
-- Marketplace channels (especially FOOD PLACE) drive most of the volume and revenue.
+registros órfãos;
+deliveries sem pedidos;
+payments sem correspondência;
+stores sem hubs;
+análise de nulos;
+tratamento de outliers operacionais.
 
-- Own channels (e.g., CHOCO PLACE, OTHER PLACE, LISBON PLACE) present substantially higher average ticket values, indicating stronger monetization despite lower volume.
 
-This suggests a typical growth pattern:
+📊 Dashboard (Power BI)
 
-- Marketplaces act as acquisition channels.
+O projeto inclui dashboard executivo desenvolvido em Power BI com foco em:
 
-- Proprietary channels maximize revenue per order.
+storytelling;
+KPIs operacionais;
+análise executiva;
+visualização analítica.
+Estrutura do Dashboard
+Executive Overview
+Operations & SLA
+Revenue & Channels
 
-## 🚚 Logistics
 
-- Motoboys handle the majority of deliveries with average distances around 3–4 km.
+🚀 Como Executar o Projeto
 
-- Bikers are primarily used for short-distance deliveries (~1 km), confirming modal specialization.
+1. Criar banco PostgreSQL
 
-- Records with missing driver information and extreme distances were excluded from operational performance metrics.
+Exemplo:
 
-## 💳 Payments
+CREATE DATABASE delivery_dw;
+2. Executar scripts SQL na ordem
+00_schemas.sql
+01_raw_tables.sql
+3. Importar arquivos CSV
 
-- Payment approval was derived from payment_status = 'PAID'.
+Importar os arquivos da pasta:
 
-- No effective chargeback events were observed in completed orders.
+data/raw/
 
-- Payment methods show strong concentration in online and voucher-based transactions.
+Utilizando:
 
-## ⚠️ Dataset limitations
+pgAdmin → Import/Export Data
+4. Executar restante dos scripts
+02_dimensions.sql
+03_facts.sql
+04_views.sql
+05_quality_checks.sql
+06_portfolio_queries.sql
 
-- No customer-level information was available (no cohort or retention analysis).
 
-- Chargeback status exists but is not associated with completed orders.
+📚 Aprendizados Técnicos
 
-- Some deliveries contain missing driver attributes and outlier distances.
+Durante o desenvolvimento deste projeto foram aplicados conceitos como:
 
-These limitations were handled via filtering and documented in the analysis.
+modelagem dimensional;
+SQL analítico;
+CTEs;
+Window Functions;
+Percentile Functions;
+agregações;
+data quality;
+construção de KPIs;
+visualização analítica;
+storytelling com dados.
 
-## 🚀 Next steps
 
-- Build a Power BI dashboard for KPIs and SLA monitoring.
+🎯 Próximos Passos
 
-- Feature engineering by hub, store and channel for ML models.
+Evoluir para análises preditivas;
+Criar modelos de previsão de SLA;
+Desenvolver modelos de previsão de cancelamento;
+Implementar pipeline automatizado;
+Adicionar camada de machine learning.
 
-- Predict delivery cycle time and cancellation probability.
 
----
-## 📦 Dataset
+👨‍💻 Sobre Mim
 
-Dataset publicly available on Kaggle.
+Profissional em transição para a área de Dados, com experiência corporativa e foco em:
 
-Source: Kaggle Delivery Dataset  
-Used for educational and portfolio purposes only.
+análise de dados;
+analytics;
+SQL;
+inteligência de negócio;
+ciência de dados.
 
-All credits to the original author.
+Este projeto faz parte da construção do meu portfólio prático voltado para oportunidades em:
 
----
+Data Analytics;
+Business Intelligence;
+Ciência de Dados.
 
-## 📬 Contato
-Se quiser falar comigo:
-- LinkedIn: https://www.linkedin.com/in/ivan-rufino-6b90173ab/
 
-  
+🔗 Contato
+
+LinkedIn
+linkedin.com/in/ivan-rufino-data
+
