@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Delivery Analytics SQL Project 🚚📊
 
 Projeto de análise de dados ponta a ponta utilizando PostgreSQL, simulando uma operação real de delivery inspirada em plataformas como Zé Delivery / marketplaces de entrega.
@@ -298,3 +299,86 @@ Ciência de Dados.
 LinkedIn
 linkedin.com/in/ivan-rufino-data
 
+=======
+# Delivery Analytics Project
+
+## 📌 Overview
+
+SQL and Power BI project focused on delivery operations analytics, inspired by marketplace and logistics business models such as Zé Delivery and Ambev operations.
+
+The project includes:
+- dimensional modeling
+- ETL process in PostgreSQL
+- analytical SQL queries
+- operational KPIs
+- Power BI dashboard
+- business insights focused on logistics and cancellations
+
+---
+
+## 🛠️ Tech Stack
+
+- PostgreSQL
+- SQL
+- Power BI
+- Git & GitHub
+
+---
+
+## 📊 Dashboard Preview
+
+### Executive Overview
+
+![Executive Overview](dashboard/executive_overview.png)
+
+---
+
+## 📂 Project Structure
+
+```text
+delivery-analytics-project/
+│
+├── data/
+├── sql/
+├── dashboard/
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 📈 Key Business Insights
+
+- SP concentrates the highest GMV but also presents the longest delivery cycle times.
+- Marketplace channels drive revenue volume.
+- Proprietary channels present higher average ticket values.
+- Cancellation rates increase significantly as delivery cycle time grows.
+
+---
+
+## 🚚 Operational Analysis
+
+The project investigates the relationship between:
+- delivery time
+- cancellation rates
+- logistics performance
+- state operational efficiency
+- channel monetization
+
+---
+
+## 📦 Dataset
+
+Public delivery dataset available on Kaggle.
+
+Used for educational and portfolio purposes only.
+
+---
+
+## 🚀 Future Improvements
+
+- Machine Learning models for cancellation prediction
+- Delivery SLA forecasting
+- Customer segmentation
+- Operational anomaly detection
+>>>>>>> 2288bba (Update project structure, README and dashboard)
