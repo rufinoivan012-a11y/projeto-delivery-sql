@@ -9,7 +9,8 @@ SQL aplicado a negócio;
 métricas operacionais;
 qualidade de dados;
 storytelling com dados;
-construção de portfólio para vagas de Dados / Analytics / Ciência de Dados.
+construção de portfólio para vagas de Dados / Analytics / Ciência de Dados
+
 📌 Objetivo do Projeto
 
 Construir um pipeline analítico completo utilizando SQL, desde a ingestão dos dados até a geração de insights operacionais e executivos.
@@ -23,27 +24,31 @@ O projeto busca demonstrar capacidade de:
 ✅ Identificar problemas operacionais através de dados
 ✅ Traduzir dados em insights acionáveis
 
+
 🧠 Contexto de Negócio
 
 O dataset representa uma operação de delivery contendo:
 
-pedidos;
-pagamentos;
-entregas;
-hubs logísticos;
-canais de venda;
-drivers;
-métricas de SLA e tempo operacional.
+- pedidos;
+- pagamentos;
+- entregas;
+- hubs logísticos;
+- canais de venda;
+- drivers;
+- métricas de SLA e tempo operacional.
 
 A proposta foi analisar:
 
-performance operacional;
-receita;
-comportamento logístico;
-cancelamentos;
-impacto do tempo de entrega;
-eficiência por estado, canal e modal de entrega.
+-performance operacional;
+- receita;
+- comportamento logístico;
+- cancelamentos;
+- impacto do tempo de entrega;
+- eficiência por estado, canal e modal de entrega.
+
+
 🛠️ Tecnologias Utilizadas
+
 Banco de Dados
 PostgreSQL
 pgAdmin
@@ -59,6 +64,8 @@ Window Functions
 Percentile Functions
 KPI Analytics
 Storytelling with Data
+
+
 🏗️ Estrutura do Projeto
 projeto-delivery-sql/
 │
@@ -86,7 +93,10 @@ projeto-delivery-sql/
 │   └── power_bi/
 │
 └── README.md
+
+
 🗂️ Arquitetura Analítica
+
 Camada RAW
 
 Importação dos arquivos CSV originais sem transformação estrutural.
@@ -105,30 +115,37 @@ dw.dim_store
 dw.dim_hub
 dw.dim_channel
 dw.dim_driver
+
 Fatos
 dw.fact_orders
 dw.fact_deliveries
 dw.fact_payments
+
 Camada Analytics
+
 Principais Views
 analytics.vw_order_360
 analytics.vw_kpi_daily
 analytics.vw_kpi_by_state
 analytics.vw_kpi_by_channel
 analytics.vw_cancel_vs_cycle
+
+
 📊 Principais Análises Desenvolvidas
+
 📈 KPIs Executivos
-GMV
-Volume de pedidos
-Ticket médio
-Taxa de cancelamento
-SLA operacional
+- GMV
+- Volume de pedidos
+- Ticket médio
+- Taxa de cancelamento
+- SLA operacional
+
 🚚 Operação Logística
-Relação entre distância e tempo de entrega
-Performance por modal de entrega
-Tempo médio por estado
-P90 de cycle time
-Ranking de hubs críticos
+- Relação entre distância e tempo de entrega
+- Performance por modal de entrega
+- Tempo médio por estado
+- P90 de cycle time
+- Ranking de hubs críticos
 ❌ Cancelamentos
 
 Análise da relação entre:
@@ -137,9 +154,10 @@ tempo de entrega;
 SLA operacional;
 distância;
 cancelamentos.
+
 Principal Insight
 
-Pedidos com maior tempo de entrega apresentam aumento significativo na taxa de cancelamento.
+Aumento no cancelamento de pedidos até 120 minutos 
 
 
 💳 Pagamentos
