@@ -1,3 +1,17 @@
+CREATE SCHEMA IF NOT EXISTS raw;
+
+-- =====================================================
+-- TABLE: raw.orders
+-- OBJETIVO:
+-- Armazenar dados brutos de pedidos importados do CSV.
+--
+-- GRANULARIDADE:
+-- 1 linha por pedido.
+--
+-- OBSERVAÇÃO:
+-- Mantém os nomes e tipos próximos ao arquivo original.
+-- =====================================================
+
 DROP TABLE IF EXISTS raw.orders;
 
 CREATE TABLE raw.orders (
@@ -36,9 +50,15 @@ CREATE TABLE raw.orders (
   order_metric_cycle_time NUMERIC
 );
 
-SELECT COUNT(*) FROM raw.orders;
-SELECT * FROM raw.orders LIMIT 5;
 
+-- =====================================================
+-- TABLE: raw.deliveries
+-- OBJETIVO:
+-- Armazenar dados brutos de entregas.
+--
+-- GRANULARIDADE:
+-- 1 linha por entrega.
+-- =====================================================
 
 DROP TABLE IF EXISTS raw.deliveries;
 
@@ -51,6 +71,15 @@ CREATE TABLE raw.deliveries (
 );
 
 
+-- =====================================================
+-- TABLE: raw.payments
+-- OBJETIVO:
+-- Armazenar dados brutos de pagamentos.
+--
+-- GRANULARIDADE:
+-- 1 linha por pagamento.
+-- =====================================================
+
 DROP TABLE IF EXISTS raw.payments;
 
 CREATE TABLE raw.payments (
@@ -62,6 +91,15 @@ CREATE TABLE raw.payments (
   payment_status TEXT
 );
 
+
+-- =====================================================
+-- TABLE: raw.stores
+-- OBJETIVO:
+-- Armazenar dados brutos das lojas.
+--
+-- GRANULARIDADE:
+-- 1 linha por loja.
+-- =====================================================
 
 DROP TABLE IF EXISTS raw.stores;
 
@@ -76,6 +114,15 @@ CREATE TABLE raw.stores (
 );
 
 
+-- =====================================================
+-- TABLE: raw.hubs
+-- OBJETIVO:
+-- Armazenar dados brutos dos hubs logísticos.
+--
+-- GRANULARIDADE:
+-- 1 linha por hub.
+-- =====================================================
+
 DROP TABLE IF EXISTS raw.hubs;
 
 CREATE TABLE raw.hubs (
@@ -88,6 +135,15 @@ CREATE TABLE raw.hubs (
 );
 
 
+-- =====================================================
+-- TABLE: raw.channels
+-- OBJETIVO:
+-- Armazenar dados brutos dos canais de venda.
+--
+-- GRANULARIDADE:
+-- 1 linha por canal.
+-- =====================================================
+
 DROP TABLE IF EXISTS raw.channels;
 
 CREATE TABLE raw.channels (
@@ -96,6 +152,15 @@ CREATE TABLE raw.channels (
   channel_type TEXT
 );
 
+
+-- =====================================================
+-- TABLE: raw.drivers
+-- OBJETIVO:
+-- Armazenar dados brutos dos entregadores.
+--
+-- GRANULARIDADE:
+-- 1 linha por entregador.
+-- =====================================================
 
 DROP TABLE IF EXISTS raw.drivers;
 
@@ -106,12 +171,16 @@ CREATE TABLE raw.drivers (
 );
 
 
+-- =====================================================
+-- VALIDAÇÃO:
+-- Conferir quantidade de registros por tabela
+-- após a criação/importação dos dados.
+-- =====================================================
 
-SELECT 'orders' tabela, COUNT(*) FROM raw.orders
+SELECT 'orders' AS tabela, COUNT(*) AS total_registros FROM raw.orders
 UNION ALL SELECT 'deliveries', COUNT(*) FROM raw.deliveries
 UNION ALL SELECT 'payments', COUNT(*) FROM raw.payments
 UNION ALL SELECT 'stores', COUNT(*) FROM raw.stores
 UNION ALL SELECT 'hubs', COUNT(*) FROM raw.hubs
 UNION ALL SELECT 'channels', COUNT(*) FROM raw.channels
 UNION ALL SELECT 'drivers', COUNT(*) FROM raw.drivers;
-

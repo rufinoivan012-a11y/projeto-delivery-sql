@@ -1,4 +1,30 @@
+-- =====================================================
+-- SCHEMA: dw
+-- OBJETIVO:
+-- Armazenar tabelas dimensionais e fatos
+-- modeladas para análise.
+-- =====================================================
+
+CREATE SCHEMA IF NOT EXISTS dw;
+
+-- =====================================================
+-- TABLE: dw.dim_date
+-- OBJETIVO:
+-- Armazenar atributos temporais derivados
+-- da data de criação dos pedidos.
+--
+-- GRANULARIDADE:
+-- 1 linha por data.
+--
+-- TIPO:
+-- Dimensão de tempo.
+-- =====================================================
+
 DROP TABLE IF EXISTS dw.dim_date CASCADE;
+
+-- =====================================================
+-- CRIAÇÃO DA DIMENSÃO DE TEMPO
+-- =====================================================
 
 CREATE TABLE dw.dim_date (
   date_key DATE PRIMARY KEY,
@@ -7,6 +33,14 @@ CREATE TABLE dw.dim_date (
   day INT NOT NULL,
   dow INT NOT NULL
 );
+
+-- =====================================================
+-- CARGA DA DIMENSÃO DE TEMPO
+--
+-- OBJETIVO:
+-- Extrair datas únicas dos pedidos
+-- e derivar atributos temporais.
+-- =====================================================
 
 INSERT INTO dw.dim_date (date_key, year, month, day, dow)
 SELECT DISTINCT
@@ -19,6 +53,17 @@ FROM raw.orders
 WHERE order_moment_created IS NOT NULL
 ON CONFLICT (date_key) DO NOTHING;
 
+-- =====================================================
+-- TABLE: dw.dim_hub
+-- OBJETIVO:
+-- Armazenar informações dos hubs logísticos.
+--
+-- GRANULARIDADE:
+-- 1 linha por hub.
+--
+-- TIPO:
+-- Dimensão logística.
+-- =====================================================
 DROP TABLE IF EXISTS dw.dim_hub CASCADE;
 
 CREATE TABLE dw.dim_hub (
@@ -29,13 +74,30 @@ CREATE TABLE dw.dim_hub (
   hub_latitude NUMERIC,
   hub_longitude NUMERIC
 );
-
+-- =====================================================
+-- CARGA DA DIMENSÃO DE HUBS
+--
+-- OBJETIVO:
+-- Carregar hubs únicos provenientes
+-- da camada raw.
+-- =====================================================
 INSERT INTO dw.dim_hub
 SELECT DISTINCT * FROM raw.hubs
 WHERE hub_id IS NOT NULL
 ON CONFLICT (hub_id) DO NOTHING;
 
-
+-- =====================================================
+-- TABLE: dw.dim_store
+-- OBJETIVO:
+-- Armazenar informações dimensionais
+-- das lojas.
+--
+-- GRANULARIDADE:
+-- 1 linha por loja.
+--
+-- TIPO:
+-- Dimensão comercial.
+-- ====================================================
 DROP TABLE IF EXISTS dw.dim_store CASCADE;
 
 CREATE TABLE dw.dim_store (
@@ -48,12 +110,30 @@ CREATE TABLE dw.dim_store (
   store_longitude NUMERIC
 );
 
+-- =====================================================
+-- CARGA DA DIMENSÃO DE LOJAS
+--
+-- OBJETIVO:
+-- Carregar lojas únicas e associá-las
+-- aos hubs logísticos.
+-- =====================================================
 INSERT INTO dw.dim_store
 SELECT DISTINCT * FROM raw.stores
 WHERE store_id IS NOT NULL
 ON CONFLICT (store_id) DO NOTHING;
 
-
+-- =====================================================
+-- TABLE: dw.dim_channel
+-- OBJETIVO:
+-- Armazenar informações dos canais
+-- de venda.
+--
+-- GRANULARIDADE:
+-- 1 linha por canal.
+--
+-- TIPO:
+-- Dimensão comercial.
+-- =====================================================
 DROP TABLE IF EXISTS dw.dim_channel CASCADE;
 
 CREATE TABLE dw.dim_channel (
@@ -62,12 +142,29 @@ CREATE TABLE dw.dim_channel (
   channel_type TEXT
 );
 
+-- =====================================================
+-- CARGA DA DIMENSÃO DE CANAIS
+--
+-- OBJETIVO:
+-- Carregar canais únicos utilizados
+-- nas vendas.
+-- =====================================================
 INSERT INTO dw.dim_channel
 SELECT DISTINCT * FROM raw.channels
 WHERE channel_id IS NOT NULL
 ON CONFLICT (channel_id) DO NOTHING;
 
-
+-- =====================================================
+-- TABLE: dw.dim_driver
+-- OBJETIVO:
+-- Armazenar informações dos entregadores.
+--
+-- GRANULARIDADE:
+-- 1 linha por entregador.
+--
+-- TIPO:
+-- Dimensão operacional.
+-- =====================================================
 DROP TABLE IF EXISTS dw.dim_driver CASCADE;
 
 CREATE TABLE dw.dim_driver (
@@ -76,6 +173,13 @@ CREATE TABLE dw.dim_driver (
   driver_type TEXT
 );
 
+-- =====================================================
+-- CARGA DA DIMENSÃO DE ENTREGADORES
+--
+-- OBJETIVO:
+-- Carregar entregadores únicos
+-- provenientes da camada raw.
+-- =====================================================
 INSERT INTO dw.dim_driver
 SELECT DISTINCT * FROM raw.drivers
 WHERE driver_id IS NOT NULL
