@@ -1,0 +1,12 @@
+# Ignorar datasets CSV
+data/raw/*.csv
+
+# Ignorar arquivos temporários do Power BI
+*.pbix.autosave
+
+# Ignorar cache do VS Code
+.vscode/
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
