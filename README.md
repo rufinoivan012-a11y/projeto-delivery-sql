@@ -8,7 +8,7 @@ O projeto foi desenvolvido com foco em modelagem analítica, SQL aplicado a neg�
 
  ## 📊 Dashboard Preview
 
-![Executive Overview](docs/dashboard_prints/executive_overview.png)
+![Executive Overview](docs/executive_overview.png)
 
 > Dashboard executivo desenvolvido em Power BI para análise operacional, logística e financeira.
 ---
@@ -176,7 +176,7 @@ Análise da relação entre:
 A taxa de cancelamento aumenta progressivamente conforme o cycle time cresce, atingindo pico operacional na faixa entre 120 e 150 minutos.
 
 
-![Cancelamento vs Cycle Time](docs/dashboard_prints/cancelamentos.png)
+![Cancelamento vs Cycle Time](docs/cancelamentos.png)
 
 ---
 
