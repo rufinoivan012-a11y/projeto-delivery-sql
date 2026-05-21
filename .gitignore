@@ -3,6 +3,7 @@ data/raw/*.csv
 
 # Ignorar arquivos temporários do Power BI
 *.pbix.autosave
+*.tmp
 
 # Ignorar cache do VS Code
 .vscode/
@@ -10,3 +11,6 @@ data/raw/*.csv
 # Ignorar arquivos temporários do sistema
 .DS_Store
 Thumbs.db
+
+# LOGS
+*.log
