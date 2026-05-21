@@ -264,6 +264,9 @@ Profissional em transição para a área de Dados, desenvolvendo projetos focado
 ---
 
 ## 🔗 Contato
+
+=======
+
 ### LinkedIn
 
 
